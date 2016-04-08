@@ -190,11 +190,21 @@ dissertation
 \cleardoublepage
 }
 
-
+\newcommand{\blankpage}{%
+  \ifodd\c@page
+  \else
+    \hbox{}\par\vfill
+    \centerline{The author intended for this page to be blank.}
+    \vfill
+    \newpage
+    \thispagestyle{empty}
+  \fi
+}
 \renewcommand{\cleardoublepage}{
-\clearpage
-\thispagestyle{empty}
-\UBT@cdp
+  \clearpage
+  \thispagestyle{empty}
+  \blankpage
+  \UBT@cdp
 }
 
 
@@ -213,6 +223,7 @@ dissertation
 \renewcommand{\references}[2][References]
 {
 \renewcommand{\UBT@bibname}{#1}
+\phantomsection
 \addcontentsline{toc}{chapter}{\UBT@bibname}
 \bibliography{#2}
 \renewcommand{\bibname}{\UBT@bibname}
